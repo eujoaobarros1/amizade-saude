@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda - Portal da Clínica</title>
+    <link rel="stylesheet" href="dashboardclinica.css">
+</head>
+<div id="aviso-pendentes" class="aviso-pendentes hidden">
+  ⚠️ Existem solicitações pendentes de confirmação.
+</div>
+<body>
+    <div class="clinic-container">
+        <!-- Header -->
+        <header class="clinic-header">
+            <div class="header-content">
+               <div class="logo">
+                    <img src="assets/logo_AmizadeSaude_color_horz.svg" alt="Amizade Saúde" class="logo-img">
+                    <span class="area-badge">Área da Clínica</span>
+                </div>
+
+                <nav class="main-nav">
+                    <nav class="main-nav">
+                    <a href="dashboardclinica.html" class="nav-link">Dashboard</a>
+                    <a href="agendamentos.html" class="nav-link" id="menu-agenda">
+                        Agenda
+                        <span id="alerta-agenda" class="pulse-alert hidden"></span>
+                    </a>
+                    <a href="pacientes.html" class="nav-link">Pacientes</a>
+                    <a href="perfil-clinica.html" class="nav-link">Perfil da Clínica</a>
+                    <a href="cadastro-assinante.html" class="nav-link active">Cadastro de Assinante</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-help">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <point cx="12" cy="17" r="1"/>
+                        </svg>
+                        Ajuda
+                    </button>
+                    <button class="btn-logout" onclick="logout()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16,17 21,12 16,7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Sair
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Agenda da Clínica</h1>
+                <p>Visualize e gerencie os agendamentos</p>
+            </div>
+
+            <!-- Filtros e Controles -->
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="date-filter">Data:</label>
+                    <input type="date" id="date-filter" class="filter-input">
+                </div>
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter" class="filter-input">
+                        <option value="all">Todos</option>
+                        <option value="confirmed">Confirmados</option>
+                        <option value="pending">Pendentes</option>
+                        <option value="canceled">Cancelados</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="type-filter">Tipo:</label>
+                    <select id="type-filter" class="filter-input">
+                        <option value="all">Todos</option>
+                        <option value="consultation">Consulta</option>
+                        <option value="exam">Exame</option>
+                        <option value="procedure">Procedimento</option>
+                    </select>
+                </div>
+                <button id="apply-filters" class="btn-primary">Aplicar Filtros</button>
+                
+            </div>
+
+            <!-- Agenda Completa -->
+            <div class="content-card full-width">
+                <div class="card-header">
+                    <h2>Agendamentos</h2>
+                    <p>Lista completa de agendamentos da clínica</p>
+                </div>
+                <div class="card-content">
+                    <div class="agenda-controls">
+                        <div class="agenda-summary">
+                            <span class="summary-item">
+                                <strong>Total:</strong> <span id="total-count">0</span>
+                            </span>
+                            <span class="summary-item">
+                                <strong>Confirmados:</strong> <span id="confirmed-count">0</span>
+                            </span>
+                            <span class="summary-item">
+                                <strong>Pendentes:</strong> <span id="pending-count">0</span>
+                            </span>
+                        </div>
+                        <div class="agenda-search">
+                            <input type="text" id="agenda-search" placeholder="Pesquisar paciente...">
+                            <button id="search-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="agenda-table-container">
+                        <table class="agenda-table">
+  <thead>
+  <tr>
+    <th>Paciente</th>
+    <th>Exame</th>
+    <th>Data</th>
+    <th>Hora</th>
+    <th>Status</th>
+    <th>Pagamento</th>
+    <th>Observação</th>
+    <th>Ações</th>
+  </tr>
+</thead>
+
+
+                           <tbody id="agendaTableBody">
+  <!-- Dados dinâmicos inseridos aqui via JS -->
+</tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination-controls">
+                        <button id="prev-page" disabled>Anterior</button>
+                        <span class="page-info">Página <span id="current-page">1</span> de <span id="total-pages">1</span></span>
+                        <button id="next-page" disabled>Próxima</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="clinic-footer">
+            <div class="footer-content">
+                <p>&copy; 2023 Amizade Saúde - Portal da Clínica. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Privacidade</a>
+                    <a href="#">Suporte</a>
+                </div>
+            </div>
+            <p class="support-info">Suporte técnico para clínicas credenciadas: 0800 987 6543</p>
+        </footer>
+    </div>
+
+    
+<!-- Modal de Edição -->
+<div id="modalEditar" class="modal hidden">
+  <div class="modal-content">
+    <h3>Editar Agendamento</h3>
+
+    <label>Data:
+      <input type="date" id="editarData">
+    </label>
+
+    <label>Hora:
+      <input type="time" id="editarHora">
+    </label>
+
+    <label>Status:
+      <select id="editarStatus">
+        <option value="">Pendente</option>
+        <option value="true">Confirmado</option>
+        <option value="false">Cancelado</option>
+      </select>
+    </label>
+
+    <label>Observação:
+      <textarea id="editarObservacao" rows="3"></textarea>
+    </label>
+
+    <div class="modal-buttons">
+      <button id="cancelarEditar" class="btn-secondary">Cancelar</button>
+      <button id="salvarEditar" class="btn-primary">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmação -->
+<div id="modalConfirmar" class="modal hidden">
+  <div class="modal-content">
+    <h3>Confirmar Alterações?</h3>
+    <div class="modal-buttons">
+      <button id="cancelarConfirmar" class="btn-secondary">Cancelar</button>
+      <button id="confirmarSalvar" class="btn-primary">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+    
+
+    <!-- SDK do Supabase (obrigatório primeiro) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
+
+    <!-- Arquivo com suas credenciais -->
+    <script src="supabase-config.js"></script>
+
+    <!-- Seu código da agenda -->
+    <script src="agenda-clinica.js"></script>
+
+    <script src="tabela-agendamentos.js"></script>
+    <script src="notificacao-agenda.js"></script>
+
+
+</body>
+</html>

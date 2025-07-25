@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Saúde Amizade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-left">
+      <img src="assets/logo_AmizadeSaude_color_horz.svg" alt="Logo Saúde Amizade" class="logo">
+      <h1>Bem-vindo de volta</h1>
+      <p class="login-subtitle">Faça login para acessar sua conta e gerenciar sua clínica</p>
+      
+      <form>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seu@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="••••••••">
+          <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+        </div>
+        
+        <button type="submit" class="btn-login">Entrar</button>
+      </form>
+      
+      
+      
+    </div>
+    
+    <div class="login-right">
+      <div class="right-content">
+        <h2 class="right-title">Sistema de Gestão Clínica</h2>
+        <p class="right-text">A plataforma completa para gerenciar os exames solicitados.</p>
+        
+        <div class="features">
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <p class="feature-text">Controle completo de pacientes e agendamentos</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <p class="feature-text">Gestão de exames e resultados</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            <p class="feature-text">Relatórios e analytics em tempo real</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal de Recuperação de Senha -->
+<div id="forgotPasswordModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Recuperar Senha</h2>
+    <form id="recoveryForm">
+      <div class="form-group">
+        <label for="recoveryEmail">E-mail cadastrado</label>
+        <input type="email" id="recoveryEmail" required>
+      </div>
+      <button type="submit" class="btn-primary">Continuar</button>
+    </form>
+    
+    <!-- Etapa 2 (será mostrada após verificação do e-mail) -->
+    <div id="passwordResetStep" style="display: none;">
+      <h3>Redefinir Senha</h3>
+      <form id="resetPasswordForm">
+        <div class="form-group">
+          <label for="newPassword">Nova Senha</label>
+          <input type="password" id="newPassword" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirme a Nova Senha</label>
+          <input type="password" id="confirmPassword" required minlength="6">
+        </div>
+        <button type="submit" class="btn-primary">Salvar Nova Senha</button>
+      </form>
+    </div>
+    
+    <div id="recoveryMessage" style="display: none;"></div>
+  </div>
+</div>
+</body>
+<script src="supabase-config.js"></script>
+    <script src="login.js"></script>
+</html>

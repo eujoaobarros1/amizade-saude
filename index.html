@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amizade Saúde - Portal de Acesso</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <img src="assets/logo_AmizadeSaude_color_horz webp.webp" alt="Amizade Saúde" class="logo">
+            <h1>Bem-vindo ao Portal Amizade Saúde</h1>
+            <p>Selecione seu tipo de acesso</p>
+        </header>
+
+        <main class="cards-container">
+            <div class="login-card" id="cardPaciente">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2e86de" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h2>Área do Paciente</h2>
+                <p>Acesse seus exames, resultados e agendamentos</p>
+                <button class="btn-acessar" onclick="location.href='login-paciente.html'">Acessar</button>
+            </div>
+
+            <div class="login-card" id="cardClinica">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <h2>Área da Clínica</h2>
+                <p>Gestão de pacientes, agendamentos e exames</p>
+                <button class="btn-acessar" onclick="location.href='login-clinica.html'">Acessar</button>
+            </div>
+        </main>
+
+        <footer class="landing-footer">
+            <p>© 2023 Amizade Saúde. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Termos de Uso</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Contato</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil da Clínica - Portal da Clínica</title>
+    <link rel="stylesheet" href="dashboardclinica.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+<div id="aviso-pendentes" class="aviso-pendentes hidden">
+  ⚠️ Existem solicitações pendentes de confirmação.
+</div>
+<body>
+    <div class="clinic-container">
+        <!-- Header (Navbar consistente) -->
+        <header class="clinic-header">
+            <div class="header-content">
+               <div class="logo">
+                    <img src="assets/logo_AmizadeSaude_color_horz.svg" alt="Amizade Saúde" class="logo-img">
+                    <span class="area-badge">Área da Clínica</span>
+                </div>
+
+                <nav class="main-nav">
+                    <a href="dashboardclinica.html" class="nav-link">Dashboard</a>
+                    <a href="agendamentos.html" class="nav-link" id="menu-agenda">
+                        Agenda
+                        <span id="alerta-agenda" class="pulse-alert hidden"></span>
+                    </a>
+                    <a href="pacientes.html" class="nav-link">Pacientes</a>
+                    <a href="perfil-clinica.html" class="nav-link">Perfil da Clínica</a>
+                    <a href="cadastro-assinante.html" class="nav-link active">Cadastro de Assinante</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-help">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <point cx="12" cy="17" r="1"/>
+                        </svg>
+                        Ajuda
+                    </button>
+                    <button class="btn-logout" onclick="logout()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16,17 21,12 16,7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Sair
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Perfil da Clínica</h1>
+                <p>Gerencie as informações e configurações da sua clínica</p>
+            </div>
+
+            <div class="profile-container">
+                <!-- Seção de Imagem -->
+                <div class="profile-image-section">
+                    <div class="image-upload">
+                        <img id="clinicaLogo" src="assets/logo_AmizadeSaude_color_horz.svg" alt="Logo da Clínica" class="clinica-logo">
+                        <label for="logoUpload" class="upload-overlay">
+                            <i class="fas fa-camera"></i>
+                            <span>Alterar Logo</span>
+                        </label>
+                        <input type="file" id="logoUpload" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+      <!-- Seção de Informações -->
+<div class="profile-info-section">
+  <div class="info-grid" id="clinicaInfoGrid">
+    <!-- Conteúdo dinâmico -->
+  </div>
+</div>
+
+<section class="exames-toggle-section">
+  <h2>Gerenciar Exames da Clínica</h2>
+  <p>Ative ou desative os exames que sua clínica oferece:</p>
+  <div id="lista-exames" class="exames-lista"></div>
+</section>
+
+
+
+<!-- Botão de Edição -->
+<div class="form-actions">
+  <button class="btn btn-primary" id="saveEdit">Editar informações</button>
+</div>
+
+
+        <!-- Footer -->
+        <footer class="clinic-footer">
+            <div class="footer-content">
+                <p>&copy; 2023 Amizade Saúde - Portal da Clínica. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Privacidade</a>
+                    <a href="#">Suporte</a>
+                </div>
+            </div>
+            <p class="support-info">Suporte técnico para clínicas credenciadas: 0800 987 6543</p>
+        </footer>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" id="closeEditModal">&times;</span>
+            <h3>Editar Informações da Clínica</h3>
+            <form id="clinicaForm">
+                <div class="form-group">
+                    <label for="editNome">Nome da Clínica</label>
+                    <input type="text" id="editNome" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="editEndereco">Endereço</label>
+                    <input type="text" id="editEndereco" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="editTelefone">Telefone</label>
+                    <input type="tel" id="editTelefone" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">E-mail</label>
+                    <input type="email" id="editEmail" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="editSite">Site</label>
+                    <input type="url" id="editSite" class="form-input">
+                </div>
+             <!-- Botão de Edição -->
+<div class="form-actions">
+  <button class="btn btn-primary" id="openEditModal">Editar informações</button>
+</div>
+
+
+
+
+
+<script src="supabase-config.js"></script>
+<script src="perfil-clinica.js"></script>
+<script src="notificacao-agenda.js"></script>
+
+</body>
+</html>

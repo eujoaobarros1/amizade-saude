@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Paciente | Saúde Amizade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+      <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-left">
+            <img src="assets/logo_AmizadeSaude_color_horz.svg" alt="Logo Saúde Amizade" class="logo">
+            <h1>Acesse sua conta</h1>
+            <p class="login-subtitle">Acompanhe seus exames e resultados</p>
+            
+            <form id="loginForm">
+    <div class="form-group">
+        <label for="cpf">CPF do Titular</label>
+        <input type="text" id="cpf" placeholder="000.000.000-00" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+        <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+    </div>
+    
+    <button type="submit" class="btn-login">
+        <span class="btn-text">Entrar</span>
+    </button>
+</form>
+            
+            <div class="divider">ou</div>
+            
+            <p class="register-link">Primeiro acesso? <a href="cadastro-paciente.html">Crie sua conta</a></p>
+        </div>
+        
+        <div class="login-right">
+            <div class="right-content">
+                <h2 class="right-title">Área do Paciente</h2>
+                <p class="right-text">Acompanhe todo o processo de seus exames em um único lugar.</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <p class="feature-text">Visualize seus exames agendados</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <p class="feature-text">Acesse resultados online</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <p class="feature-text">Receba alertas e lembretes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Recuperação de Senha -->
+    <div id="forgotPasswordModal" class="modal">
+        <!-- Conteúdo igual ao anterior -->
+    </div>
+<!-- Adicione isso antes do fechamento do </body> -->
+<div id="forgotPasswordModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    
+    <!-- Etapa 1 - Validação do CPF -->
+    <div id="step1">
+      <h2>Recuperação de Senha</h2>
+      <p>Digite o CPF cadastrado para iniciar o processo</p>
+      
+      <form id="recoveryForm">
+        <div class="form-group">
+          <label for="recoveryCpf">CPF do Titular</label>
+          <input type="text" id="recoveryCpf" placeholder="000.000.000-00" required>
+        </div>
+        <button type="submit" class="btn-primary">Continuar</button>
+      </form>
+    </div>
+    
+    <!-- Etapa 2 - Nova senha -->
+    <div id="step2" style="display: none;">
+      <h2>Redefinir Senha</h2>
+      <p>CPF: <span id="displayCpf"></span></p>
+      
+      <form id="resetPasswordForm">
+        <div class="form-group">
+          <label for="newPassword">Nova Senha</label>
+          <input type="password" id="newPassword" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirme a Nova Senha</label>
+          <input type="password" id="confirmPassword" required minlength="6">
+          <div id="passwordMatchMessage" class="password-match"></div>
+        </div>
+        <button type="submit" class="btn-primary">Salvar Nova Senha</button>
+      </form>
+    </div>
+    
+    <div id="recoveryMessage" class="recovery-message"></div>
+  </div>
+</div>
+    <script src="supabase-config.js"></script>
+    <script src="login-paciente.js"></script>
+</body>
+</html>
